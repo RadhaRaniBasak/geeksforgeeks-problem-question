@@ -1,0 +1,20 @@
+class Solution {
+    public int minMen(int[] arr) {
+        int n = arr.length;
+        int covered = 0;
+        int men = 0;
+        while (covered < n) {
+            int maxCover = covered;
+            for (int i = 0; i < n; i++) {
+                if (arr[i] != -1 && i - arr[i] <= covered && i + arr[i] >= maxCover) {
+                    maxCover = i + arr[i] + 1;
+                    if (maxCover > n) maxCover = n;
+                }
+            }
+            if (maxCover == covered) return -1;
+            covered = maxCover;
+            men++;
+        }
+        return men;
+    }
+}
